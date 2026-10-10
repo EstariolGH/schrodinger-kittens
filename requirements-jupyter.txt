@@ -1,0 +1,4 @@
+# Для блокнота cats_jupyter.ipynb (сверх requirements.txt)
+-r requirements.txt
+qiskit[visualization]>=2.0
+jupyterlab>=4.0
