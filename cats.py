@@ -24,13 +24,21 @@ import argparse
 import math
 import sys
 
+from _venv import ensure_project_venv, missing_libs_exit
+
+ensure_project_venv()
+
 # чтобы русский текст не ломался в консоли Windows
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
-import matplotlib.pyplot as plt
-from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister, transpile
-from qiskit.quantum_info import Statevector, partial_trace
+try:
+    import matplotlib.pyplot as plt
+    from qiskit import QuantumCircuit, ClassicalRegister, QuantumRegister, transpile
+    from qiskit.quantum_info import Statevector, partial_trace
+    import qiskit_aer, qiskit_ibm_runtime  # noqa: F401,E401  — проверяем, что всё на месте
+except ImportError as e:
+    missing_libs_exit(e)
 
 # --------------------------------------------------------------------------
 # 1. Схема

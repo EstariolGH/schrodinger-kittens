@@ -17,6 +17,10 @@ import sys
 from getpass import getpass
 from pathlib import Path
 
+from _venv import ensure_project_venv, missing_libs_exit
+
+ensure_project_venv()
+
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
@@ -46,7 +50,10 @@ def main() -> None:
     if len(key) < 20:
         sys.exit("Похоже, это не ключ: он слишком короткий. Скопируйте его ещё раз целиком.")
 
-    from qiskit_ibm_runtime import QiskitRuntimeService
+    try:
+        from qiskit_ibm_runtime import QiskitRuntimeService
+    except ImportError as e:
+        missing_libs_exit(e)
 
     QiskitRuntimeService.save_account(
         token=key,
