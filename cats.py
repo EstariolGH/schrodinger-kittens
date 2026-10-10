@@ -166,7 +166,9 @@ def plot(counts: dict, shots: int, title: str, filename: str, show: bool) -> Non
     bars = ax.bar(range(8), values, color=colors)
     for b, v in zip(bars, values):
         if v:
-            ax.text(b.get_x() + b.get_width() / 2, v, f"{v}\n({v / shots:.0%})",
+            share = v / shots   # маленькие доли — с десятыми, чтобы не было «0%»
+            pct = f"{share:.1%}" if share < 0.095 else f"{share:.0%}"
+            ax.text(b.get_x() + b.get_width() / 2, v, f"{v}\n({pct})",
                     ha="center", va="bottom", fontsize=9)
     ax.set_xticks(range(8))
     ax.set_xticklabels(labels, fontsize=8.5)
