@@ -1,0 +1,16 @@
+# Виртуальное окружение
+.venv/
+venv/
+
+# Ключи IBM — НИКОГДА не выкладывать
+apikey.json
+*apikey*.json
+qiskit-ibm.json
+
+# Мусор Python и Jupyter
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+# Картинки, которые рисует cats.py
+cats_histogram.png
